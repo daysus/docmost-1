@@ -18,21 +18,15 @@ export class MinimaxService {
     signal?: AbortSignal,
   ): Promise<void> {
     const apiKey = process.env.MINIMAX_API_KEY;
-    const groupId = process.env.MINIMAX_GROUP_ID;
 
     if (!apiKey) {
       onError('MINIMAX_API_KEY not configured');
       return;
     }
 
-    if (!groupId) {
-      onError('MINIMAX_GROUP_ID not configured');
-      return;
-    }
-
     try {
       const response = await fetch(
-        `${this.baseUrl}/chat/completions?GroupId=${groupId}`,
+        `${this.baseUrl}/chat/completions`,
         {
           method: 'POST',
           headers: {
